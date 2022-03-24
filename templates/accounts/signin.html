@@ -1,0 +1,39 @@
+{%  extends 'base.html'  %}
+{%   load static  %}
+{%  block title  %} | Login{% endblock  %}
+{% block content %}
+<main>
+  <div class="container">
+    {%  if request.user.is_authenticated  %}
+        <div style="margin-top:100px">
+          <h4 class="alert alert-secondary" style="margin-top: 25px;">welcome, {{request.user.username}}' Your logind Already & Do you want
+              <a href="{%  url 'logout'  %}" style="color: black; font-size:29px">Logout?</a>
+          </h4>
+        </div>
+    {% else  %}
+    <div style="margin-top: 80px; margin-left:450px">
+      <h2 >Sign Up</h2>
+      </div>
+    {% include 'partials/_alerts.html'  %}
+      <section class="mb-4">
+        <form id="forms" method="POST">
+              {% csrf_token  %}
+              <div class="mb-3" style="width:50%;margin-left:21%;">
+              <label for="exampleInputusername" class="form-label">username</label>
+              <input type="username" class="form-control" id="exampleInputusername" required name="user">
+              </div>
+              <div class="mb-3" style="width:50%;margin-left:21%;">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" name="pass">
+              </div>
+              <div class="mb-3 form-check"  style="margin-left: 21%;">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" name="rememberme">
+              <label class="form-check-label" for="exampleCheck1 ">Remmber me</label>
+              </div>
+              <button type="submit" class="btn btn-primary" style="margin-left: 21%;" name="btnsignin">Submit</button>
+        </form>
+    </section>
+  </div>
+</main>
+{% endif  %}
+{% endblock %}

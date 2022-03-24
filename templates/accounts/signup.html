@@ -1,0 +1,62 @@
+{%  extends 'base.html'  %}
+{%   load static  %}
+{%  block title  %} | Signup{% endblock  %}
+{% block content %}
+<div>
+  <main>
+      <div class="container">
+{%  if request.user.is_authenticated  %}
+
+        <h4 class="alert alert-secondary" style="margin-top: 79px;">welcome, {{request.user.username}}' Your logind Already & Do you want
+            <a href="{%  url 'logout'  %}" style="color: black; font-size:29px">Logout?</a>
+        </h4>
+{% else  %}
+<div style="margin-top: 80px; margin-left:-16px">
+<h2 class="text-center">Sign Up</h2>
+</div>
+        <div style="margin-top: 4px;">
+          {% include 'partials/_alerts.html'  %}
+        </div>
+        <section class="mb-4">
+          {%  if is_add == True %}
+          <form id="forms" method="POST" style="display: none;">
+          {% else %}
+          <form id="forms" method="POST" >
+          {% endif  %} 
+              {%  csrf_token %}
+                <div class="mb-3" style="width: 60%;margin-left:20%;">
+                <label for="exampleInputUsername" class="form-label">username</label>
+                <input type="username" class="form-control" id="exampleInputusername" required name="user">
+                </div>
+                <div class="mb-3" style="width: 60%;margin-left:20%;">
+                  <label for="exampleInputfirstname" class="form-label">Firstname</label>
+                  <input type="firstname" class="form-control" id="exampleInputfirstname" required name="fname" value="{{fname}}">
+                </div>
+                <div class="mb-3" style="width: 60%;margin-left:20%;">
+                  <label for="exampleInputlastname" class="form-label">Lastname</label>
+                  <input type="lastname" class="form-control" id="exampleInputlastname" required name="lname" value="{{lname}}">
+                </div>
+                <div class="mb-3" style="width: 60%;margin-left:20%;">
+                  <label for="exampleInputUsername" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="exampleInputusername" required name="email" value="{{email}}">
+                </div>
+                <div class="mb-3" style="width: 60%;margin-left:20%;">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="pass">
+                </div>
+                <div class="mb-3 form-check" style="width: 60%;margin-left:20%;">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="policy">
+                <label class="form-check-label" for="exampleCheck1">I Agree Policy</label>
+                </div>
+                <button style="width: 60%;margin-left:20%;" type="submit" class="btn btn-primary" name="sumbit">Submit</button>
+          </form>
+        </section>
+      </div>
+    </main>
+</div>
+  
+
+{% endif  %}
+
+
+{%  endblock  %}
